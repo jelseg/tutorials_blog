@@ -1,0 +1,54 @@
+Includes create page,route, database, CRUD
+
+create application:
+in terminal, in folder:
+rails new ''name''
+check by:
+cd ''name''
+rails server
+
+
+create controller to make a page
+rails generate controller ''name''
+
+created a page:
+in config/routes
+''method'' ''name'', to ''controller''#''name''
+eg
+get 'about', to: 'pages#about'
+in controller ad:
+def ''name''
+end
+in folder in views add ''name''.html.erb file
+
+
+create CRUDs
+rails generate scaffold ''name'' ''fiel1dname'':''field1type'' ''other fields''
+eg 
+rails generate scaffold Article title:string description:text
+check created routes:
+rails routes --expanded
+migrate the new migration files:
+rails db:migrate
+
+alternative:
+create migration file:
+rails generate migration name_of_migration_file
+fill in this migration file
+and routes, controllers and pages
+
+for routes you can use
+resources :''name'', only: [:''methodnames'']
+eg
+resources :articles, only: [:show, :index, :new, :create, :edit, :update, :destroy]
+ps above statement is equivalent to "resources :articles" since all rest methods are added
+
+
+-------------
+
+set validations for fields
+in model add (app/models/<name>.rb) add
+validates :<field name>, <validations>
+
+eg
+validates :title, presence: true, length: {minimum: 6, maximum: 50}

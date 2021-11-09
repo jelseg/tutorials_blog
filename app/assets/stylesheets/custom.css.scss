@@ -1,0 +1,60 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+
+:root {
+    --color-darkbgrey:rgba(26, 35, 44, 0.842);
+    --color-lightbgrey:rgb(134, 165, 196);
+    --color-lightgrey:rgb(170, 175, 190);
+    --color-deepblue: rgb(30, 110, 190);
+}
+
+
+/*   ------ cutomisation for the navbar -------------*/
+
+.navbar {
+    background-color: var(--color-darkbgrey) ;
+}
+
+.nav-link {
+    color: var(--color-lightbgrey) !important;
+}
+.nav-link:hover {
+    font-weight: bold;
+}
+.nav-link.disabled {
+    font-style: italic;
+    font-weight: lighter;
+    color: var(--color-lightgrey) !important;
+}
+
+
+.navbar-brand {
+    color: var(--color-lightbgrey) !important;
+
+    float: left !important; 
+    font-size: 1.7em !important;
+    text-transform: uppercase !important;
+    letter-spacing: -1px !important;
+    font-weight: bold !important;
+
+    font-family: "Papyrus", fantasy, serif !important;
+}
+
+.dropdown-item {
+    color: var(--color-darkbgrey) !important;
+}
+
+
+
+/*------- pages styling ----- */
+
+#frontpage_jumbotron {
+    background-image: asset-url("homepage_image.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 450px;
+
+    color: var(--color-deepblue) ;
+    font-weight: bold;
+}

@@ -1,0 +1,32 @@
+BOOTSTRAP (frontend)
+
+add bootstrap to application:
+yarn add bootstrap jquery popper.js
+yarn add @popperjs/core
+(run in command window as administrator while in project folder)
+check in package.json that bootstrap, jquery and popper are added
+
+
+in config/webpack/environment.js add
+
+    const webpack = require("webpack")
+    environment.plugins.append("Provide", new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      Popper: ['popper.js', 'default']
+    }))
+
+in the middle
+
+in app/javascript/packs/application.js add
+import "bootstrap"
+import "../stylesheets/application"
+at the end
+
+in app/javascript add folder stylesheets with file application.scss with
+@import "bootstrap";
+
+
+-------------------------------------------------------------------------------
+
+https://getbootstrap.com/docs/5.1/getting-started/introduction/
