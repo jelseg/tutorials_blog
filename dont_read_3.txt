@@ -1,0 +1,54 @@
+users 
+
+here make authentication system with bcrypt (automatically imported when creating ror app):
+
+in gemfile uncomment 
+gem 'bcrypt'
+and do
+bundle install
+
+later will use the devise gem instead (does the same but is less work)
+
+--- ad user table and relations ----
+
+create user table (with username and email) like befor
+in migration file add (in create table)
+t.string :password_digest
+or add new migration file with
+add_column :users, :password_digest, :string
+and 
+add_column :articles, :user_id, :int
+(to make connection from article to a user)
+
+and migrate (rails db:migrate)
+
+in articles model add
+belongs_to :user
+and in user model
+has_many :articles
+-> can now use article.user or user.articles to retireve a user/ list of articles
+
+-quick temp fix- remove no user errors when saving
+in rails console create a default user (user = User.create(...)   user.save)
+update all articles to have this user (Article.update_all(user_id: user.id))
+note the users id
+in articles controller, in create add
+@article.user = User.find(1)
+after @article = Article.new(article_params)  (assuming the id of the default user is 1)
+-> will harcode all new articles to default user
+
+
+----make all email adresses lower case before saving---
+add
+before_save { self.email = email.downcase }
+in user model
+
+
+--- using bcrypt ---
+in user model add
+has_secure_password
+
+test in console
+user.password = "123456"
+check if user.password_digest is in hash from
+check user.authenticate(''password'') -> the user when correct, false when incorrect
