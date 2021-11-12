@@ -1,27 +1,58 @@
-<%= form_with(model: article) do |form| %>
-  <% if article.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+<% if article.errors.any? %>
 
-      <ul>
-        <% article.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= render 'commen_elements/basicIcons' %>
+
+<div class="mb-4 mx-auto col-sm-8 shadow">
+  <div class="alert alert-danger alert-dismissible fade show">
+  <h4 class="alert-heading">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+     Couldn't save your article </h4>
+    <p><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</p>
+    <hr>
+    <ul>
+      <% article.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+</div>
+<% end %>
+
+<%= form_with(model: article) do |form| %>  <!--- will also give us a form class in html --->
+
+  <div class="p-5 my-5 rounded-3 col-sm-8 mx-auto text-center shadow" id="form-box">
+  <div class="container-fluid py-5">
+
+    <div class="form-group row">
+      <div class="col-2">
+        <%= form.label :title, class: "col-form-label" %>
+      </div>
+      <div class="col-8">
+        <%= form.text_field :title, class: "form-control shadow rounded", placeholder: "Title of article" %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <br>
+
+    <div class="form-group row">
+      <div class="col-2">
+        <%= form.label :description, class: "col-form-label" %>
+      </div>
+      <div class="col-8">
+        <%= form.text_area :description, rows: 10, class: "form-control shadow rounded", placeholder: "description of article" %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="actions form-group row col-8 mx-auto">
+      <%= form.submit class: "btn btn-outline-light btn-lg" %>
+    </div>
+
+  </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  
 <% end %>

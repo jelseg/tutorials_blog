@@ -27,6 +27,11 @@ in app/javascript add folder stylesheets with file application.scss with
 @import "bootstrap";
 
 
+in application view:
+<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+should be last -> own scss files will overule bootstrap
+
+
 -------------------------------------------------------------------------------
 
 https://getbootstrap.com/docs/5.1/getting-started/introduction/

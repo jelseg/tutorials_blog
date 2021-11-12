@@ -1,0 +1,35 @@
+<% if flash.any?  %>
+
+    <%= render 'commen_elements/basicIcons' %>
+
+    <div class="m-4 mx-auto col-sm-8">
+
+
+<% flash.each do |name, msg| %>
+    <% if name=="notice" then %>
+    
+        <div class="alert alert-secondary alert-dismissible fade show">
+            <h4 class="alert-heading">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#check-circle-fill"/></svg> 
+                <%= msg %>  </h4>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+    <% elsif name=="alert" then %>
+
+        <div class="alert alert-danger alert-dismissible fade show">
+            <h4 class="alert-heading">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg> 
+                <%= msg %>  </h4>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+    <% else %>
+      warning: <%= msg %>
+    <% end %>
+  <% end %>
+
+
+    </div>
+
+  <% end %>

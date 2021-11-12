@@ -1,14 +1,16 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @article.description %>
-</p>
+<div class="p-5 my-5 rounded-3 col-sm-8 mx-auto text-center" id="form-box">
+  <div class="container-fluid py-5">
+    <h1 class="display-5 fw-bold"><%= @article.title %></h1>
+    <hr>
+    <p class="col-md-8 fs-4 mx-auto"><%= @article.description %></p>
+    <%= link_to 'edit', edit_article_path(@article), class: "btn btn-primary" %>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+
+<div class="me-4 text-end">
+  <%= link_to 'Edit', edit_article_path(@article) %> |
+  <%= link_to 'Back', articles_path %>
+</div>

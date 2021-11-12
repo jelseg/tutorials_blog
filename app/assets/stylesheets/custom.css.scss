@@ -8,6 +8,11 @@
     --color-deepblue: rgb(30, 110, 190);
 }
 
+/*-----body -----*/
+body {
+    background-color: var(--color-lightbgrey);
+}
+
 
 /*   ------ cutomisation for the navbar -------------*/
 
@@ -57,4 +62,24 @@
 
     color: var(--color-deepblue) ;
     font-weight: bold;
+}
+
+
+
+/*------- text --------*/
+.normal-text {
+    color: black;
+    text-decoration: none;
+}
+
+.normal-text:hover {
+    font-weight: bold;
+}
+
+
+
+/*------ forms -----*/
+#form-box {
+    background-color: var(--color-deepblue);
+    color: var(--color-lightbgrey);
 }
