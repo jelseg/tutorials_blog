@@ -1,6 +1,12 @@
 
 <h1 class="text-center">Articles</h1>
 
+<%= render "commen_elements/paginate", objs: @articles %>
+
+<div class="text-center my-2">
+  <%= link_to 'New Article', new_article_path, class: "btn btn-outline-success col-6" %>
+</div>
+
   <% @articles.each do |art| %>
 
     <%= render "articlecard", article: art %>
@@ -9,4 +15,8 @@
 
 <br>
 
-<%= link_to 'New Article', new_article_path, class: "btn btn-outline-success" %>
+<div class="text-center my-2">
+  <%= link_to 'New Article', new_article_path, class: "btn btn-outline-success col-6" %>
+</div>
+
+<%= render "commen_elements/paginate", objs: @articles %>

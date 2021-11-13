@@ -1,10 +1,14 @@
 <h1 class="text-center m-4"> <%= @user.username %>'s profile </h1>
 
-<% @user.articles.each do |art| %>
+<%= render "commen_elements/paginate", objs: @articles %>
+
+<% @articles.each do |art| %>
 
   <%= render "articles/articlecard", article: art %>
 
 <% end %>
+
+<%= render "commen_elements/paginate", objs: @articles %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

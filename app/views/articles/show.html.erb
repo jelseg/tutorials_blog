@@ -3,7 +3,9 @@
 <div class="p-5 my-5 rounded-3 col-sm-8 mx-auto text-center" id="form-box">
   <div class="container-fluid py-5">
     <h1 class="display-5 fw-bold"><%= @article.title %></h1>
-    <p class="subtitle-text"> by <%= @article.user.username %> </p>
+    <% if @article.user then %>
+      <%= link_to @article.user.username, user_path(@article.user), class: "subtitle-text" %>
+    <% end %>
     <hr>
     <p class="fs-4 mx-auto w-75"><%= @article.description %></p>
     <%= link_to 'edit', edit_article_path(@article), class: "btn btn-primary" %>
