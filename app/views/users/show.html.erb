@@ -1,14 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h1 class="text-center m-4"> <%= @user.username %>'s profile </h1>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<% @user.articles.each do |art| %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <%= render "articles/articlecard", article: art %>
+
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

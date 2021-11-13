@@ -43,6 +43,9 @@ add
 before_save { self.email = email.downcase }
 in user model
 
+----extra validation options-----
+https://guides.rubyonrails.org/active_record_validations.html
+
 
 --- using bcrypt ---
 in user model add
@@ -52,3 +55,13 @@ test in console
 user.password = "123456"
 check if user.password_digest is in hash from
 check user.authenticate(''password'') -> the user when correct, false when incorrect
+
+
+------partials with variables ----
+we can replace a variable (eg @article) with a generic name (eg obj) and when rendering that partial give in the variable for that generic name
+eg render ..., obj: @article
+
+
+----check what is given in-----
+can place 'byebug' in the action in a contoller -> app will pause there
+in terminal you can do params to see what was passed on
