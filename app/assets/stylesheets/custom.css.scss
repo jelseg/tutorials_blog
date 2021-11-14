@@ -49,6 +49,12 @@ body {
     color: var(--color-darkbgrey) !important;
 }
 
+.dropdown-item.disabled {
+  font-style: italic;
+  font-weight: lighter;
+  color: var(--color-lightgrey);
+}
+
 
 
 /*------- pages styling ----- */

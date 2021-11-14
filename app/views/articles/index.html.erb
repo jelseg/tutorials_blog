@@ -3,9 +3,11 @@
 
 <%= render "commen_elements/paginate", objs: @articles %>
 
+<% if logged_in? %>
 <div class="text-center my-2">
   <%= link_to 'New Article', new_article_path, class: "btn btn-outline-success col-6" %>
 </div>
+<% end %>
 
   <% @articles.each do |art| %>
 
@@ -15,8 +17,10 @@
 
 <br>
 
-<div class="text-center my-2">
+<% if logged_in? %>
+<div class="text-center mb-2">
   <%= link_to 'New Article', new_article_path, class: "btn btn-outline-success col-6" %>
 </div>
+<% end %>
 
 <%= render "commen_elements/paginate", objs: @articles %>

@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_login, only: [:edit, :update, :destroy]
+  before_action :require_no_login, only: [:new, :create]
+  before_action :same_user, only: [:edit, :update, :destroy]
 
   # GET /users or /users.json
   def index
@@ -28,6 +31,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+
+        session[:user_id] = @user.id #immediatly log in when you sign up
+
         format.html { redirect_to articles_path, notice: "Welcome #{@user.username}, you have succesfully signed up" }
         format.json { render :show, status: :created, location: @user }
       else
@@ -68,5 +74,13 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:username, :email, :password)
+    end
+
+    #do require_login first
+    def same_user
+      if @user != current_user
+        flash[:alert] = "you can not do this to another user"
+        redirect_to @user
+      end
     end
 end

@@ -65,3 +65,36 @@ eg render ..., obj: @article
 ----check what is given in-----
 can place 'byebug' in the action in a contoller -> app will pause there
 in terminal you can do params to see what was passed on
+
+
+
+-----remember to whitelist all params in user_param private method -----
+
+
+
+---------------------pagination-----------------------------------------------------------------------------
+use will_paginate gem
+(look up what you need to add to install)
+add to gem file:
+gem 'will_paginate', '~> 3.3'
+terminal: bundle install
+
+replace ''obj''.all with ''obj''.paginate(page: params[:page], per_page: 30) in controller
+eg articles = Article.paginate(page: params[:page], per_page: 30)
+
+in view add:
+<%= will_paginate ''variable'' %>
+eg <%= will_paginate @articles %>
+
+github page for this gem contains a link to some styling examples
+
+
+--------- check if loged in ---------------------
+functions to be used in multiple views should be in app/helper/application_helper
+functions to be used in multiple contollers shoud be in application_controller
+to make a method in application_controller useable in application_helper add:
+helper_method :''methodname''
+in controller
+
+||= if left side doesn't exist it will return the right side and assigns that value to the left side -> don't have to query the database every time
+!! -> turn into a boolean
