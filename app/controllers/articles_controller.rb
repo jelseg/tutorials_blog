@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
 
     #has to do require_login first
     def is_article_owner
-      if @article.user != current_user
+      if @article.user != current_user && !current_user.admin?
         flash[:alert] = "You can not do this with someone else's articles"
         redirect_to @article
       end

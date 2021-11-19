@@ -4,3 +4,5 @@
 
 <%= link_to 'Show', @user %> |
 <%= link_to 'Back', users_path %>
+<br>
+<%= link_to 'delete account', user_path(@user), class: "btn btn-danger", method: :delete, data: { confirm: "Are you sure? Your account and all it's articles will be removed, this can not be undone!"} %>

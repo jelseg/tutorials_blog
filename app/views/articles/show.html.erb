@@ -9,7 +9,7 @@
     <hr>
     <p class="fs-4 mx-auto w-75"><%= @article.description %></p>
 
-    <% if logged_in? && @article.user == current_user %>
+    <% if logged_in? && (@article.user == current_user || current_user.admin?) %>
     <%= link_to 'edit', edit_article_path(@article), class: "btn btn-primary" %>
     <%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
     <% end %>
