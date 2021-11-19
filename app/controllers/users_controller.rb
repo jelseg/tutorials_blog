@@ -1,13 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_login, only: [:edit, :update, :destroy]
+  before_action :require_no_login, only: [:new, :create]
+  before_action :same_user, only: [:edit, :update, :destroy]
 
   # GET /users or /users.json
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /users/1 or /users/1.json
   def show
+    @articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /users/new
@@ -23,9 +27,14 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    #byebug
+
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
+
+        session[:user_id] = @user.id #immediatly log in when you sign up
+
+        format.html { redirect_to articles_path, notice: "Welcome #{@user.username}, you have succesfully signed up" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +47,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: "User was successfully updated." }
+        format.html { redirect_to articles_path, notice: "Your account has been updated" }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,9 +59,17 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
+    if @user == current_user
+      session[:user_id] = nil
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: "User was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to users_path, notice: "User was successfully destroyed." }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -64,6 +81,14 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:username, :email)
+      params.require(:user).permit(:username, :email, :password)
+    end
+
+    #do require_login first
+    def same_user
+      if @user != current_user && (!current_user.admin?)
+        flash[:alert] = "you can not do this to another user"
+        redirect_to @user
+      end
     end
 end

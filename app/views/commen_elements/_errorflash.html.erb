@@ -1,0 +1,20 @@
+<% if obj.errors.any? %>   <!--- needs to specify obj when rendering this partial --->
+
+<%= render 'commen_elements/basicIcons' %>
+
+<div class="mb-4 mx-auto col-sm-8 shadow">
+  <div class="alert alert-danger alert-dismissible fade show">
+  <h4 class="alert-heading">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+     Couldn't save </h4>
+    <p><%= pluralize(obj.errors.count, "error") %> prohibited your <%= obj.class.name.downcase %> from being saved:</p>
+    <hr>
+    <ul>
+      <% obj.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+</div>
+<% end %>

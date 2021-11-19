@@ -1,6 +1,7 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Users</h1>
+
+<%= render "commen_elements/paginate", objs: @users %>
 
 <table>
   <thead>
@@ -26,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New User', signup_path %>

@@ -1,27 +1,50 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= render 'commen_elements/errorflash', obj: @user %>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: user) do |form| %>  <!--- will also give us a form class in html --->
+
+  <div class="p-5 my-5 rounded-3 col-sm-8 mx-auto text-center shadow" id="form-box">
+  <div class="container-fluid py-5">
+
+    <div class="form-group row">
+      <div class="col-2">
+        <%= form.label :username, class: "col-form-label" %>
+      </div>
+      <div class="col-8">
+        <%= form.text_field :username, class: "form-control shadow rounded", placeholder: "pick a username" %>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username %>
+    <br>
+
+    <div class="form-group row">
+      <div class="col-2">
+        <%= form.label :email, class: "col-form-label" %>
+      </div>
+      <div class="col-8">
+        <%= form.email_field :email, class: "form-control shadow rounded", placeholder: "email@example.com" %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="form-group row">
+      <div class="col-2">
+        <%= form.label :password, class: "col-form-label" %>    <!--- altough data field in database is called differently, we can refer to it using the virtual atribute password -->
+      </div>
+      <div class="col-8">
+        <%= form.password_field :password, class: "form-control shadow rounded", placeholder: "pasword123&" %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="actions form-group row col-8 mx-auto">
+      <%= form.submit(@user.new_record? ? "sign up" : "Update", class: "btn btn-outline-light btn-lg") %>
+    </div>
+
+  </div>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  
 <% end %>

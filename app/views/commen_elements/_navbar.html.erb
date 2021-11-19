@@ -1,14 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light"> <!-- removed bg-light to use own color -->
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"> Tutorial Blog</a>
+    <a class="navbar-brand" href="<%= root_path %>"> Tutorial Blog</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="<%= about_path %>">about</a>
         </li>
@@ -18,14 +15,41 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="<%= articles_url %>">All Articles</a></li>
-            <li><a class="dropdown-item" href="<%= new_article_url %>" >Create Article</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item  <%= "disabled" if !logged_in? %> " href="<%= new_article_url %>" >Create Article</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Disabled</a>
         </li>
+
+
+        <% if logged_in? %>  <!---- logged_in and current_user are defined in application_helper ---->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.username %>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><%= link_to "profile", user_path(current_user), class: "dropdown-item" %> </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to "edit account", edit_user_path(current_user), class: "dropdown-item" %> </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to 'LOG OUT', logout_path, class: "nav-link", method: :delete %>
+          </li>
+
+        <% else %>
+
+          <li class="nav-item">
+            <a class="nav-link" href="<%= login_path %>">login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= signup_path %>">sign up</a>
+          </li>
+        <% end %>
+
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

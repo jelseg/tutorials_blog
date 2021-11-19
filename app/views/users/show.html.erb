@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
+<h1 class="text-center m-4"> <%= @user.username %>'s profile </h1>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<%= render "commen_elements/paginate", objs: @articles %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<% @articles.each do |art| %>
+
+  <%= render "articles/articlecard", article: art %>
+
+<% end %>
+
+<%= render "commen_elements/paginate", objs: @articles %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

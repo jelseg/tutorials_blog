@@ -1,9 +1,11 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :require_login, except: [:show, :index]
+  before_action :is_article_owner, only: [:edit, :update, :destroy]
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /articles/1 or /articles/1.json
@@ -22,7 +24,7 @@ class ArticlesController < ApplicationController
   # POST /articles or /articles.json
   def create
     @article = Article.new(article_params)
-    @article.user = User.find(1)
+    @article.user = current_user
 
     respond_to do |format|
       if @article.save
@@ -67,4 +69,13 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :description)
     end
+
+    #has to do require_login first
+    def is_article_owner
+      if @article.user != current_user && !current_user.admin?
+        flash[:alert] = "You can not do this with someone else's articles"
+        redirect_to @article
+      end
+    end
+
 end
