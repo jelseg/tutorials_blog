@@ -1,0 +1,33 @@
+------- test based development ------
+first write tests, then for each test write the minimal code to pass this test
+
+
+----automatic testing (unit tests) -----
+model tests:
+you have a test folder 
+to run these tests do: rails test
+
+to create a test: 
+class CategoryTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end
+
+look up assertions -> used to make sure test is true
+
+note that after every function all variables are scrapped again
+and after each run the test database is emptied
+
+
+def setup -> will run before each test
+
+to use database in test comment out
+parallelize(workers: :number_of_processors, with: :threads)
+in test_helper.rb
+
+--add categries --
+go to model folder  -> add category.rb
+add migration file with a :name field
+
+
