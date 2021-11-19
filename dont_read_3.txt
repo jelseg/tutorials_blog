@@ -28,6 +28,9 @@ and in user model
 has_many :articles
 -> can now use article.user or user.articles to retireve a user/ list of articles
 
+accociations options: https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html
+
+
 -quick temp fix- remove no user errors when saving
 in rails console create a default user (user = User.create(...)   user.save)
 update all articles to have this user (Article.update_all(user_id: user.id))
@@ -42,6 +45,7 @@ after @article = Article.new(article_params)  (assuming the id of the default us
 add
 before_save { self.email = email.downcase }
 in user model
+
 
 ----extra validation options-----
 https://guides.rubyonrails.org/active_record_validations.html
@@ -79,6 +83,8 @@ add to gem file:
 gem 'will_paginate', '~> 3.3'
 terminal: bundle install
 
+note: when pulled to git main, you need to bundle install again
+
 replace ''obj''.all with ''obj''.paginate(page: params[:page], per_page: 30) in controller
 eg articles = Article.paginate(page: params[:page], per_page: 30)
 
@@ -98,3 +104,21 @@ in controller
 
 ||= if left side doesn't exist it will return the right side and assigns that value to the left side -> don't have to query the database every time
 !! -> turn into a boolean
+
+
+--------- add admin functionality ------------
+create migration file
+rails generate migration add_admin_to_users
+
+in new migration file (in db/migrate) add
+add_column ''table'', ''field'', ''type'', default: ''default''
+eg
+add_column :users, :admin, :boolean, default: false
+
+rails db:migrate
+
+see if user is admin:
+user.admin?
+
+change admin status of user:
+user.toggle!(:admin)
