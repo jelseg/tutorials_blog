@@ -31,3 +31,25 @@ go to model folder  -> add category.rb
 add migration file with a :name field
 
 
+-- automatic testing: functional testing (contoller test)
+
+to generate tests for a contoller (for CRUD actions) you can use: (is already done if you use a scaffold generator to make everything):
+rails generate test_unit:scaffold category
+(where category is the name of the unit)
+
+you can add folder path or filepath to rails test to only doe a part of the tests
+rails test test/controllers
+otherwise it will do all tests (except for system)
+
+note you might have to add
+    gem 'rexml', require: false
+to the gem file (and bundle install) 
+
+
+--- integration test: test bussiness process ---
+
+cretae integration test:
+rails generate integration_test create_category
+(with create_category the name of the test)
+
+
