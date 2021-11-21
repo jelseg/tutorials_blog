@@ -1,0 +1,9 @@
+<h1 class="text-center">Categories</h1>
+
+<%= render "commen_elements/paginate", objs: @categories %>
+
+<% @categories.each do |cat| %>
+
+    <%= render "categorycard", category: cat %>
+
+<% end %>

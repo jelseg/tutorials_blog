@@ -82,6 +82,14 @@ body {
     font-weight: bold;
 }
 
+.noDeco-text {
+  text-decoration: none;
+}
+
+.noDeco-text:hover {
+  font-weight: bold;
+}
+
 .subtitle-text {
     color: var(--color-lightgrey);
     text-decoration: none;
