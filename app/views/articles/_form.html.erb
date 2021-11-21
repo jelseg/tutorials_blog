@@ -27,6 +27,20 @@
 
     <br>
 
+    <div class="form-group row" >
+      <div class="col-2">
+        <%= form.label :category, class: "col-form-label" %>
+      </div>
+      <div class="col-8">
+        <%= form.collection_select(:category_ids, Category.order(:name), :id, :name,
+                                   {prompt: "select all categories that apply (use ctrl for multiple)"},
+                                   {multiple: true, class: "form-select shadow rounded"}) %>
+      </div>
+
+    </div>
+
+    <br>
+
     <div class="actions form-group row col-8 mx-auto">
       <%= form.submit class: "btn btn-outline-light btn-lg" %>
     </div>

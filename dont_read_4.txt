@@ -53,3 +53,31 @@ rails generate integration_test create_category
 (with create_category the name of the test)
 
 
+--- many2many associations ---
+
+also look on guides.rubyonrails.org and search for associations
+
+extra table with ids of both tables
+
+rails generate migration create_''nam1''_''name2''
+and add
+  create_table :article_categories do |t|
+    t.integer :article_id
+    t.integer :category_id
+  end
+and db:migrate
+
+add model
+in ArticleCategory model add belongs to for both tables
+
+in other two models add
+has_many :articlecategory
+has_many :''othertable'' , through: :article_categories
+
+
+to add an assiociation between article and category (in colsole)
+can check articles belonging to a category with: category.articles
+link them: category.articles << article
+or switch category and article 
+
+

@@ -6,6 +6,13 @@
     <% if @article.user then %>
       <%= link_to @article.user.username, user_path(@article.user), class: "subtitle-text" %>
     <% end %>
+
+    <% if @article.categories.any? %>
+      <div class="m-2">
+        <%= render @article.categories %> <!-- expects an category partial, with variable category--> 
+      </div>
+    <% end %>
+
     <hr>
     <p class="fs-4 mx-auto w-75"><%= @article.description %></p>
 

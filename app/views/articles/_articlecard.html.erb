@@ -1,8 +1,13 @@
 <div class="col-sm-6 mx-auto mb-3 shadow"> <!-- col-... -> width, mx-auto -> centered on page, mb -> whiteborder/ space between cards -->
     <div class="card text-center">
       <div class="card-header">
-        <%= article.id %>
+        <% if article.categories.any? %>
+          <div class="m-2">
+            <%= render article.categories %> <!-- expects an category partial, with variable category--> 
+          </div>
+        <% end %>
       </div>
+
 
       <div class="card-body">
         <h5 class="card-title"><%=  %> <%= link_to article.title, article, class: "normal-text" %> </h5>

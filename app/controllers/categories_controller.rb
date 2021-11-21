@@ -22,8 +22,24 @@ class CategoriesController < ApplicationController
     end
 
     def show
+        @articles = @category.articles.paginate(page: params[:page], per_page: 5)
+    end
+
+    def edit
 
     end
+
+    def update
+        respond_to do |format|
+          if @category.update(category_params)
+            format.html { redirect_to @category, notice: "Category was successfully updated." } #notice will be available trough flash[:notice] (same for alert and warning)
+            format.json { render :show, status: :ok, location: @category }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @category.errors, status: :unprocessable_entity }
+          end
+        end
+      end
 
 
     private 
