@@ -5,6 +5,12 @@ class CreateCategoryTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
 
+  setup do
+    @admin_user = User.create(username: "MisterAdmin", email: "1@ok.com",
+                              password: "password123", admin: true) #note: to use our method sign_in_as we need to always take the same password for all users (have to hardcode it there)
+    sign_in_as(@admin_user)
+    end
+
   test "get new category form and create category" do
     get "/categories/new"
     assert_response :success
