@@ -1,0 +1,25 @@
+--- heroku deployment ---
+https://devcenter.heroku.com/articles/getting-started-with-rails6
+
+
+note used jelleseg@gmail.com
+@password
+
+
+-need heroku cli installed
+
+in console:
+heroku login
+
+go to the aplication directory
+
+for first time:
+heroku create 
+
+set up database gem:
+in gemfile add
+goup :production do
+    gem 'pg'
+end
+
+and move sqlit gem to group :development, :test 

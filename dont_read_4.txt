@@ -80,4 +80,9 @@ can check articles belonging to a category with: category.articles
 link them: category.articles << article
 or switch category and article 
 
+when creating an article you can use:
+Article.new(title: "title", description: "description of article", user: user_object, category_ids: [1,2])
+
+to make selection boxes look up form helpers on rail guides
+
 
