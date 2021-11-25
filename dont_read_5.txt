@@ -18,8 +18,40 @@ heroku create
 
 set up database gem:
 in gemfile add
-goup :production do
+group :production do
     gem 'pg'
 end
 
 and move sqlit gem to group :development, :test 
+
+and do bundle install --without production
+or first
+bundle config set --local without 'production'
+and then 
+bundle install
+
+rename:
+heroku rename ''name''
+
+--every time--
+
+commit to git
+
+publish to heroku
+git push heroku main
+
+migrate database:
+heroku run rake db:migrate
+
+
+to go to site do 
+heroku open
+
+to open rails console do
+heroku run rails console
+
+check dynos
+heroku ps
+
+
+

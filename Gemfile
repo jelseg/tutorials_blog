@@ -23,6 +23,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass'
 gem 'will_paginate', '~> 3.3'
 gem 'rexml', require: false
+gem 'semantic-ui-sass'
+gem 'jquery-rails'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
